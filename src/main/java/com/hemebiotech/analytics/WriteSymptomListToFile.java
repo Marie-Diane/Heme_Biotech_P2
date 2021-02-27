@@ -3,10 +3,19 @@ package com.hemebiotech.analytics;
 import java.io.FileWriter;
 import java.util.Map;
 
+/**
+ * Simple brute force implementation
+ *
+ */
 
 public class WriteSymptomListToFile implements ISymptomWriter {
-
 	private String filenameToWrite;
+
+    /**
+	 * 
+	 * @param filenameToWrite A full or partial path to file exist or not, to write
+	 *                        inside
+	 */
 
 	public WriteSymptomListToFile(String filenameToWrite) {
 		this.filenameToWrite = filenameToWrite;
