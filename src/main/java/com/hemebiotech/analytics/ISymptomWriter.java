@@ -2,6 +2,6 @@ package com.hemebiotech.analytics;
 
 public interface ISymptomWriter {
 
-    void WriteSymptomsWithCounter();
+    void WriteSymptomsWithCounter() throws Exception;
 
 }

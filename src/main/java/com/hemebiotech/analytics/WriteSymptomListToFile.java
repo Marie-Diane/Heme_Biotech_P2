@@ -1,7 +1,6 @@
 package com.hemebiotech.analytics;
 
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,14 +17,20 @@ public class WriteSymptomListToFile implements ISymptomWriter {
 	}
 
 	@Override
-	public void WriteSymptomsWithCounter() {
-		if (filenameToWrite != null) {
-			try {
-				FileWriter writer = new FileWriter(filenameToWrite);
-				int count = 1;
-				if (symptomList != null) {
+	public void WriteSymptomsWithCounter() throws Exception {
 
-					Collections.sort(symptomList);
+		if (filenameToWrite == null) {
+            throw new Exception("Le fichier de destination n'a pas été spécifié");
+        } else {
+
+            try (FileWriter writer = new FileWriter(filenameToWrite)) {
+
+                int count = 1;
+				if (symptomList == null) {
+                    throw new Exception("La liste des symptomes est inexistante");
+
+                } else {
+                    Collections.sort(symptomList);
 
 					for (int i = 0; i < symptomList.size(); ++i) {
 						String symptom = symptomList.get(i);
@@ -36,16 +41,9 @@ public class WriteSymptomListToFile implements ISymptomWriter {
 							writer.write(symptom + " : " + count + "\n");
 							count = 1;
 						}
-					}
-				} else {
-					writer.write("La liste des symptomes est inexistante");
-				}
-				writer.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-			System.out.print("Le fichier de destination n'a pas été spécifié");
-		}
-	}
+                    }
+                }
+           }
+        }
+    }
 } 
